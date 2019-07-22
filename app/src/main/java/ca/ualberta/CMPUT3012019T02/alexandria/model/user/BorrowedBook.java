@@ -1,6 +1,6 @@
 package ca.ualberta.CMPUT3012019T02.alexandria.model.user;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * This class represents the relationship between a User and an OwnedBook, where the User has made

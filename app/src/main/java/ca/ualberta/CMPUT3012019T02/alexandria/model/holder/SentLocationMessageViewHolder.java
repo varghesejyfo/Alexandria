@@ -1,11 +1,12 @@
 package ca.ualberta.CMPUT3012019T02.alexandria.model.holder;
 
-import android.support.annotation.NonNull;
-import android.support.constraint.ConstraintLayout;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.RecyclerView;
 
 import ca.ualberta.CMPUT3012019T02.alexandria.R;
 
