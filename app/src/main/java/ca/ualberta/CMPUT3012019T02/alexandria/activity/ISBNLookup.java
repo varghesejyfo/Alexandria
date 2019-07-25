@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 
+import java.util.Objects;
+
 import ca.ualberta.CMPUT3012019T02.alexandria.R;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 /**
@@ -40,7 +42,7 @@ public class ISBNLookup extends AppCompatActivity implements ZXingScannerView.Re
 
         Toolbar toolbar = findViewById(R.id.isbn_scanner_toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);    // remove default title
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);    // remove default title
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
         toolbar.setNavigationOnClickListener(v -> finish());

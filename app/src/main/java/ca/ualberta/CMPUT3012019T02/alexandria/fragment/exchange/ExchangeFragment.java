@@ -14,10 +14,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.util.Objects;
+
 import ca.ualberta.CMPUT3012019T02.alexandria.R;
 import ca.ualberta.CMPUT3012019T02.alexandria.adapter.TabsAdapter;
 import ca.ualberta.CMPUT3012019T02.alexandria.fragment.SearchFragment;
-
 /**
  * Created as a fragment by MainActivity
  * Creates tab fragments, BorrowedFragment, AcceptedFragment,RequestedFragment
@@ -63,7 +64,7 @@ public class ExchangeFragment extends Fragment implements View.OnClickListener {
      */
     @Override
     public void onClick(View v) {
-        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getFragmentManager()).beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container,
                 new SearchFragment(), "Search Fragment");
         fragmentTransaction.addToBackStack(null);
@@ -74,6 +75,6 @@ public class ExchangeFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
 
-        getActivity().findViewById(R.id.navigation).setVisibility(View.VISIBLE);
+        Objects.requireNonNull(getActivity()).findViewById(R.id.navigation).setVisibility(View.VISIBLE);
     }
 }

@@ -9,7 +9,6 @@ import com.algolia.search.saas.Query;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-import org.apache.commons.io.IOUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,7 +42,7 @@ public class SearchController {
     private static UserController userController = UserController.getInstance();
 
     private SearchController() {
-        client = new Client("9ETLQT0YZC", App.getContext().getResources().getString(R.string.algolia_api_key));
+        client = new Client("8911KSR51U", App.getContext().getResources().getString(R.string.algolia_api_key));
         index = client.getIndex("search");
         try {
             index.setSettingsAsync(new JSONObject().put(
@@ -65,9 +64,7 @@ public class SearchController {
      * @return the UserController instance
      */
     public static SearchController getInstance() {
-        if (instance == null) {
-            instance = new SearchController();
-        }
+        if (instance == null) instance = new SearchController();
         return instance;
     }
 
@@ -83,29 +80,24 @@ public class SearchController {
         index.searchAsync(new Query(search),
                 (content, error) -> {
                     ArrayList<Book> books = new ArrayList<>();
-                    if (error == null) {
-                        try {
-                            JSONArray jsonArray;
-                            jsonArray = content.getJSONArray("hits");
-                            for (int i = 0; i < jsonArray.length(); i++){
-                                Book book = gson.fromJson(jsonArray.getString(i),Book.class);
-                                // && !(book.getAvailableOwners())
-                                boolean isOwner = book.getAvailableOwners().contains(userController.getMyId());
+                    if (error == null) try {
+                        JSONArray jsonArray;
+                        jsonArray = content.getJSONArray("hits");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            Book book = gson.fromJson(jsonArray.getString(i), Book.class);
+                            // && !(book.getAvailableOwners())
+                            boolean isOwner = book.getAvailableOwners().contains(userController.getMyId());
 
-                                if (!(book.getAvailableOwners() == null)
-                                        && !(book.getAvailableOwners().size() == 0)
-                                        && !(isOwner && book.getAvailableOwners().size() == 1)) {
-                                    books.add(book);
-                                }
-                            }
-                            resultFuture.complete(books);
-                        } catch (JSONException e) {
-                            resultFuture.completeExceptionally(e);
+                            if (!(book.getAvailableOwners() == null)
+                                    && !(book.getAvailableOwners().size() == 0)
+                                    && !(isOwner && book.getAvailableOwners().size() == 1))
+                                books.add(book);
                         }
+                        resultFuture.complete(books);
+                    } catch (JSONException e) {
+                        resultFuture.completeExceptionally(e);
                     }
-                    else {
-                        resultFuture.completeExceptionally(error);
-                    }
+                    else resultFuture.completeExceptionally(error);
                 });
 
         return resultFuture;
@@ -138,9 +130,7 @@ public class SearchController {
                    InputStream in1 = bookConnection1.getInputStream();
                    InputStream in2 = bookConnection2.getInputStream();
 
-                   if (IOUtils.contentEquals( in1, in2 )) {
-                       equalIsbn = true;
-                   }
+//                   if (IOUtils.contentEquals( in1, in2 )) equalIsbn = true;
 
 //                   InputStreamReader bookInput1 = new InputStreamReader(in1);
 //                   InputStreamReader bookInput2 = new InputStreamReader(in2);
@@ -195,9 +185,7 @@ public class SearchController {
                     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
                 ) {
                     String line;
-                    while ((line = bufferedReader.readLine()) != null) {
-                        stringBuilder.append(line);
-                    }
+                    while ((line = bufferedReader.readLine()) != null) stringBuilder.append(line);
                 } finally {
                     httpURLConnection.disconnect();
                 }
@@ -222,9 +210,8 @@ public class SearchController {
 
                 if (thumbnail != null) {
                     Bitmap bitmap = BitmapFactory.decodeStream(new URL(thumbnail).openConnection().getInputStream());
-                    if (bitmap != null) {
+                    if (bitmap != null)
                         imageId = ImageController.getInstance().addImage(bitmap).get(5, TimeUnit.SECONDS);
-                    }
                 }
 
                 Book book = new Book(isbn, title, author, null, imageId);

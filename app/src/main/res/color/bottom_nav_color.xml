@@ -1,5 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="MissingDefaultResource">
     <item android:state_checked="true" android:color="@color/colorBeige" />
-    <item android:color="@color/colorOrange"  />
+<!--    <item android:color="@color/colorOrange"  />-->
+    <!-- MaterialDrawer specific values -->
+    <item android:name="material_drawer_window_background" tools:ignore="ExtraText">@color/material_drawer_window_background</item>
+    <item android:name="material_drawer_background">@color/material_drawer_background</item>
+    <item android:name="material_drawer_icons">@color/material_drawer_icons</item>
+    <item android:name="material_drawer_primary_text">@color/material_drawer_primary_text</item>
+    <item android:name="material_drawer_secondary_text">@color/material_drawer_secondary_text</item>
+    <item android:name="material_drawer_hint_text">@color/material_drawer_hint_text</item>
+    <item android:name="material_drawer_divider">@color/material_drawer_divider</item>
+    <item android:name="material_drawer_selected">@color/material_drawer_selected</item>
+    <item android:name="material_drawer_selected_text">@color/material_drawer_selected_text</item>
+    <item android:name="material_drawer_header_selection_text">@color/material_drawer_icons</item>
 </selector>

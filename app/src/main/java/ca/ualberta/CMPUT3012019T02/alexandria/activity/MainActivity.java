@@ -1,5 +1,4 @@
 package ca.ualberta.CMPUT3012019T02.alexandria.activity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
